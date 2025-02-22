@@ -1,0 +1,119 @@
+baseURL = '/'
+pagination.pagerSize = 5
+defaultContentLanguage = 'pt'
+
+theme = "PaperMod"
+[params]
+  subtitle = 'minha página pessoal'
+  [params.contact]
+    email = 'joao.amadeu@unifio.edu.br'
+  contentTypeName = "posts"
+  showMenuItems = 2
+  showLanguageSelector = true
+  fullWidthTheme = true
+  centerTheme = false
+
+[markup]
+  defaultMarkdownHandler = 'goldmark'
+  [markup.goldmark]
+    duplicateResourceFiles = false
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      linkifyProtocol = 'https'
+      strikethrough = true
+      table = true
+      taskList = true
+      [markup.goldmark.extensions.cjk]
+        eastAsianLineBreaks = false
+        eastAsianLineBreaksStyle = 'simple'
+        enable = false
+        escapedSpace = false
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.delete]
+          enable = false
+        [markup.goldmark.extensions.extras.insert]
+          enable = false
+        [markup.goldmark.extensions.extras.mark]
+          enable = false
+        [markup.goldmark.extensions.extras.subscript]
+          enable = false
+        [markup.goldmark.extensions.extras.superscript]
+          enable = false
+      [markup.goldmark.extensions.passthrough]
+        enable = false
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = []
+          inline = []
+      [markup.goldmark.extensions.typographer]
+        apostrophe = '&rsquo;'
+        disable = false
+        ellipsis = '&hellip;'
+        emDash = '&mdash;'
+        enDash = '&ndash;'
+        leftAngleQuote = '&laquo;'
+        leftDoubleQuote = '&ldquo;'
+        leftSingleQuote = '&lsquo;'
+        rightAngleQuote = '&raquo;'
+        rightDoubleQuote = '&rdquo;'
+        rightSingleQuote = '&rsquo;'
+    [markup.goldmark.parser]
+      autoDefinitionTermID = false
+      autoHeadingID = true
+      autoIDType = 'github'
+      wrapStandAloneImageWithinParagraph = true
+      [markup.goldmark.parser.attribute]
+        block = false
+        title = true
+    [markup.goldmark.renderHooks]
+      [markup.goldmark.renderHooks.image]
+        enableDefault = false
+      [markup.goldmark.renderHooks.link]
+        enableDefault = false
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = false
+      xhtml = false
+
+
+[languages]
+  [languages.pt]
+      languageName = "Português"
+      title = "fortmea"
+      [languages.pt.params]
+        subtitle = "Minha página pessoal"
+        copyright = "fortmea, 2025"
+        menuMore = "Mostrar mais"
+        readMore = "Continuar leitura"
+        readOtherPosts = "Outras postagens"
+
+      [languages.pt.params.logo]
+        logoText = "Fortmea"
+        logoHomeLink = "/"
+
+      [languages.pt.menu]
+        [[languages.pt.menu.main]]
+          identifier = "about"
+          name = "Sobre"
+          url = "/about"
+
+  [languages.en]
+      languageName = "English"
+      title = "fortmea"
+      [languages.en.params]
+        subtitle = "My personal page"
+        copyright = "fortmea, 2025"
+        menuMore = "Show more"
+        readMore = "Read more"
+        readOtherPosts = "Other posts"
+
+      [languages.en.params.logo]
+        logoText = "Fortmea"
+        logoHomeLink = "/"
+
+      [languages.en.menu]
+        [[languages.en.menu.main]]
+          identifier = "about"
+          name = "About"
+          url = "/about"
