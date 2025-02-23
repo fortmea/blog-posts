@@ -70,6 +70,6 @@ Ative o arquivo com o comando ```a2ensite nomedoarquivo.conf``` e recarregue o s
 
 ### Resultado
 
-![A ferramenta tem uma aparência muito agradável, e outros temas podem ser instalados, além de muitas outras configurações que estão disponíveis](https://fortmea.tech/images/searx.png "A ferramenta tem uma aparência muito agradável, e outros temas podem ser instalados, além de muitas outras configurações que estão disponíveis")
+![A ferramenta tem uma aparência muito agradável, e outros temas podem ser instalados, além de muitas outras configurações que estão disponíveis](/posts/images/searx.png "A ferramenta tem uma aparência muito agradável, e outros temas podem ser instalados, além de muitas outras configurações que estão disponíveis")
 
 Até a próxima!

@@ -1,0 +1,128 @@
+baseURL: '/'
+pagination:
+  pagerSize: 5
+defaultContentLanguage: 'pt'
+
+theme: "PaperMod"
+params:
+  subtitle: 'minha página pessoal'
+  contact:
+    email: 'joao.amadeu@unifio.edu.br'
+  contentTypeName: "posts"
+  showMenuItems: 2
+  showLanguageSelector: true
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: false
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+markup:
+  defaultMarkdownHandler: 'goldmark'
+  goldmark:
+    duplicateResourceFiles: false
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      linkifyProtocol: 'https'
+      strikethrough: true
+      table: true
+      taskList: true
+      cjk:
+        eastAsianLineBreaks: false
+        eastAsianLineBreaksStyle: 'simple'
+        enable: false
+        escapedSpace: false
+      extras:
+        delete:
+          enable: false
+        insert:
+          enable: false
+        mark:
+          enable: false
+        subscript:
+          enable: false
+        superscript:
+          enable: false
+      passthrough:
+        enable: false
+        delimiters:
+          block: []
+          inline: []
+      typographer:
+        apostrophe: '&rsquo;'
+        disable: false
+        ellipsis: '&hellip;'
+        emDash: '&mdash;'
+        enDash: '&ndash;'
+        leftAngleQuote: '&laquo;'
+        leftDoubleQuote: '&ldquo;'
+        leftSingleQuote: '&lsquo;'
+        rightAngleQuote: '&raquo;'
+        rightDoubleQuote: '&rdquo;'
+        rightSingleQuote: '&rsquo;'
+    parser:
+      autoDefinitionTermID: false
+      autoHeadingID: true
+      autoIDType: 'github'
+      wrapStandAloneImageWithinParagraph: true
+      attribute:
+        block: false
+        title: true
+    renderHooks:
+      goldmark:
+        renderHooks:
+          image:
+            enableDefault: false
+          link:
+            enableDefault: false
+    renderer:
+      hardWraps: false
+      unsafe: false
+      xhtml: false
+
+languages:
+  pt:
+    languageName: "Português"
+    title: "fortmea"
+    params:
+      subtitle: "Minha página pessoal"
+      copyright: "fortmea, 2025"
+      menuMore: "Mostrar mais"
+      readMore: "Continuar leitura"
+      readOtherPosts: "Outras postagens"
+    logo:
+      logoText: "Fortmea"
+      logoHomeLink: "/"
+    menu:
+      main:
+        - identifier: "about"
+          name: "Sobre"
+          url: "/about"
+  en:
+    languageName: "English"
+    title: "fortmea"
+    params:
+      subtitle: "My personal page"
+      copyright: "fortmea, 2025"
+      menuMore: "Show more"
+      readMore: "Read more"
+      readOtherPosts: "Other posts"
+    logo:
+      logoText: "Fortmea"
+      logoHomeLink: "/"
+    menu:
+      main:
+        - identifier: "about"
+          name: "About"
+          url: "/about"
