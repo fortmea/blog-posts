@@ -126,7 +126,7 @@ languages:
           url: "https://github.com/fortmea"
         - name: LinkedIn
           title: Meu LinkedIn
-          url: "https://www.linkedin.com/in/jo%C3%A3o-walter-amadeu"
+          url: "https://www.linkedin.com/in/joao-walter-amadeu/"
     logo:
       logoText: "Fortmea"
       logoHomeLink: "/"
@@ -160,7 +160,7 @@ languages:
           url: "https://github.com/fortmea"
         - name: LinkedIn
           title: My linkedin profile
-          url: "https://www.linkedin.com/in/jo%C3%A3o-walter-amadeu"
+          url: "https://www.linkedin.com/in/joao-walter-amadeu/"
     logo:
       logoText: "Fortmea"
       logoHomeLink: "/"
