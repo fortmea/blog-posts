@@ -41,6 +41,7 @@ outputs:
 markup:
   defaultMarkdownHandler: 'goldmark'
   goldmark:
+    unsafe: true 
     duplicateResourceFiles: false
     extensions:
       definitionList: true
@@ -100,7 +101,7 @@ markup:
             enableDefault: false
     renderer:
       hardWraps: false
-      unsafe: false
+      unsafe: true
       xhtml: false
 
 languages:
