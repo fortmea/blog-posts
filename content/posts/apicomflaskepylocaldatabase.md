@@ -5,6 +5,7 @@ anterior: "pylocaldatabase"
 proximo: "ipfs"
 catimage: "https://www.python.org/static/community_logos/python-logo-generic.svg"
 upd: ""
+tags: ['python', 'library', 'api']
 ---
 
 Seguindo o tópico da minha [publicação anterior](../pylocaldatabase), estou desenvolvendo uma API, e utilizando-a nesse website para gerenciar os comentários das publicações. 

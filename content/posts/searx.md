@@ -5,6 +5,7 @@ anterior: "redditsaver"
 proximo: ""
 catimage: "https://docs.searxng.org/_static/searxng-wordmark.svg"
 upd: ""
+tags: ['selfhosting', 'vps', 'searx']
 ---
 
 ### O que é o SearxNG?

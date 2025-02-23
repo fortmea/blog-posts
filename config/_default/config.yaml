@@ -4,28 +4,48 @@ pagination:
 defaultContentLanguage: 'pt'
 
 theme: "PaperMod"
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+
+
+
 params:
   subtitle: 'minha página pessoal'
   contact:
     email: 'joao.amadeu@unifio.edu.br'
   contentTypeName: "posts"
   showMenuItems: 2
+  ShowFullTextinRSS: true
   showLanguageSelector: true
   ShowReadingTime: true
   ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
+  ShowCodeCopyButtons: true
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
-  disableSpecial1stPost: false
+  disableSpecial1stPost: true
   disableScrollToTop: false
-  comments: false
+  comments: true
   hidemeta: false
   hideSummary: false
-  showtoc: false
+  showtoc: true
   tocopen: false
+  defaultTheme: dark 
+  profileMode:
+    enabled: true 
+    imageUrl: "posts/images/eu.JPEG"
+    imageWidth: 120
+    imageHeight: 120
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
 markup:
   defaultMarkdownHandler: 'goldmark'
   goldmark:
@@ -98,9 +118,23 @@ languages:
     params:
       subtitle: "Minha página pessoal"
       copyright: "fortmea, 2025"
-      menuMore: "Mostrar mais"
-      readMore: "Continuar leitura"
-      readOtherPosts: "Outras postagens"
+      profileMode:
+        title: fortmea
+        imageTitle: eu
+        buttons:
+          - name: Postagens
+            url: posts
+          - name: Tags
+            url: tags
+          - name: Pesquisar
+            url: search
+      socialIcons:
+        - name: github
+          title: Meu Github
+          url: "https://github.com/fortmea"
+        - name: LinkedIn
+          title: Meu LinkedIn
+          url: "https://www.linkedin.com/in/jo%C3%A3o-walter-amadeu"
     logo:
       logoText: "Fortmea"
       logoHomeLink: "/"
@@ -118,6 +152,23 @@ languages:
       menuMore: "Show more"
       readMore: "Read more"
       readOtherPosts: "Other posts"
+      profileMode:
+        title: fortmea
+        imageTitle: me
+        buttons:
+          - name: Posts
+            url: posts
+          - name: Tags
+            url: tags
+          - name: Search
+            url: search
+      socialIcons:
+        - name: github
+          title: My github profile
+          url: "https://github.com/fortmea"
+        - name: LinkedIn
+          title: My linkedin profile
+          url: "https://www.linkedin.com/in/jo%C3%A3o-walter-amadeu"
     logo:
       logoText: "Fortmea"
       logoHomeLink: "/"

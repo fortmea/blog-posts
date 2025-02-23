@@ -4,6 +4,7 @@ date: "2024-10-31"
 anterior: "searx"
 catimage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/720px-Arduino_Logo.svg.png"
 upd: ""
+tags: ['C', 'arduino', 'sound', 'electronics']
 ---
 
 De volta após muito tempo, apresento a vocês um passatempo recente.

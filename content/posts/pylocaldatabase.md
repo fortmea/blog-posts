@@ -5,6 +5,7 @@ anterior: ""
 proximo: "apicomflaskepylocaldatabase"
 catimage: "https://www.python.org/static/community_logos/python-logo-generic.svg"
 upd: ""
+tags: ['python', 'library', 'pypi']
 ---
 
 Python é uma linguagem muito famosa por sua facilidade de uso, especialmente no aspecto da organização e estruturamento de dados.
