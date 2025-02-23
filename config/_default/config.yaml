@@ -2,15 +2,7 @@ baseURL: '/'
 pagination:
   pagerSize: 5
 defaultContentLanguage: 'pt'
-
 theme: "PaperMod"
-
-minify:
-  disableXML: true
-  minifyOutput: true
-
-
-
 
 params:
   subtitle: 'minha página pessoal'
