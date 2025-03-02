@@ -9,6 +9,7 @@ params:
   contact:
     email: 'joao.amadeu@unifio.edu.br'
   contentTypeName: "posts"
+  keywords: [Blog, Portfolio, fortmea, programação, dev, android, flutter]
   showMenuItems: 2
   ShowFullTextinRSS: true
   showLanguageSelector: true
@@ -107,12 +108,12 @@ markup:
 languages:
   pt:
     languageName: "Português"
-    title: "fortmea"
+    title: "joão walter amadeu"
     params:
       subtitle: "Minha página pessoal"
-      copyright: "fortmea, 2025"
+      copyright: "joão walter amadeu, 2025"
       profileMode:
-        title: fortmea
+        title: joão walter amadeu
         imageTitle: eu
         buttons:
           - name: Postagens
@@ -128,9 +129,6 @@ languages:
         - name: LinkedIn
           title: Meu LinkedIn
           url: "https://www.linkedin.com/in/joao-walter-amadeu/"
-    logo:
-      logoText: "Fortmea"
-      logoHomeLink: "/"
     menu:
       main:
         - identifier: "about"
@@ -138,15 +136,15 @@ languages:
           url: "/about"
   en:
     languageName: "English"
-    title: "fortmea"
+    title: "joão walter amadeu"
     params:
       subtitle: "My personal page"
-      copyright: "fortmea, 2025"
+      copyright: "joão walter amadeu, 2025"
       menuMore: "Show more"
       readMore: "Read more"
       readOtherPosts: "Other posts"
       profileMode:
-        title: fortmea
+        title: joão walter amadeu
         imageTitle: me
         buttons:
           - name: Posts
@@ -162,9 +160,6 @@ languages:
         - name: LinkedIn
           title: My linkedin profile
           url: "https://www.linkedin.com/in/joao-walter-amadeu/"
-    logo:
-      logoText: "Fortmea"
-      logoHomeLink: "/"
     menu:
       main:
         - identifier: "about"
