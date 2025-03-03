@@ -21,7 +21,7 @@ jobs:
       - name: Find Markdown files
         id: find_files
         run: |
-          files=$(find content -name '*.md')
+          files=$(find content -name '*.md' | grep -vE '\.en\.md$')
           echo "files=$(echo $files | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
 
       - name: Translate files
@@ -30,10 +30,12 @@ jobs:
         run: |
           for file in $(echo ${{ env.files }} | jq -r '.[]'); do
             basename=$(basename "$file" .md)
-            for lang in en; do
-              translation=$(curl -s -X POST "https://api-free.deepl.com/v2/translate" \
-                -H "Authorization: DeepL-Auth-Key $DEEPL_API_KEY" \
-                -d "text=$(cat $file)" -d "target_lang=$lang" | jq -r '.translations[0].text')
-              echo "$translation" > "content/${basename}.${lang}.md"
-            done
+            if [ -f "content/${basename}.en.md" ]; then
+              echo "Skipping $file (manual translation exists)"
+              continue
+            fi
+            translation=$(curl -s -X POST "https://api-free.deepl.com/v2/translate" \
+              -H "Authorization: DeepL-Auth-Key $DEEPL_API_KEY" \
+              -d "text=$(cat $file)" -d "target_lang=en" | jq -r '.translations[0].text')
+            echo "$translation" > "content/${basename}.en.md"
           done
