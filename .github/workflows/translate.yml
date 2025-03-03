@@ -52,19 +52,23 @@ jobs:
           
           source: ${{ steps.read_file.outputs.content }}
           #api_key: ${{ secrets.DEEPL_API_KEY }}
-
       - name: Save translated file
         run: |
           original="${{ matrix.file }}"
           new_file="${original%.md}.en.md"
           echo "Salvando tradução em: $new_file"
-          echo "${{ steps.deepl.outputs.text }}" | jq -r . > "$new_file"
+          printf "%s" '${{ steps.deepl.outputs.text}}'> "$new_file"
+          echo "\n"
+          cd content
+          ls
+          cd posts
+          ls
 
       - name: Upload translated file
         uses: actions/upload-artifact@v4
         with:
           name: translated-md
-          path: ${{ matrix.file.md }}.en.md
+          path: ${{ matrix.file }}.en.md
 
   commit:
     name: Commit Translated Files
