@@ -36,26 +36,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Read file content
+        id: read_file
+        run: |
+          echo "Lendo o conteúdo do arquivo: ${{ matrix.file }}"
+          content=$(cat "${{ matrix.file }}" | jq -Rs .)
+          echo "::set-output name=content::$content"
+
       - name: Translate file content with DeepL
         id: deepl
         uses: fabasoad/translation-action@main
         with:
           provider: deepl
           lang: en-uk
-          source: ${{ matrix.file }}  
+          source: ${{ steps.read_file.outputs.content }}
           api_key: ${{ secrets.DEEPL_API_KEY }}
 
       - name: Save translated file
         run: |
           original="${{ matrix.file }}"
-          new_file="${original%.md}.en.md"
+          new_file="${original.md}.en.md"
           echo "Salvando tradução em: $new_file"
-          echo "${{ steps.deepl.outputs.text }}" > "$new_file"
-          ls
-          cd content
-          ls
-          cd posts
-          ls
+          echo "${{ steps.deepl.outputs.text }}" | jq -r . > "$new_file"
+
+      - name: Upload translated file
+        uses: actions/upload-artifact@v4
+        with:
+          name: translated-md
+          path: ${{ matrix.file.md }}.en.md
 
   commit:
     name: Commit Translated Files
@@ -65,15 +73,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Download translated files
+        uses: actions/download-artifact@v4
+        with:
+          name: translated-md
+          path: content/
+
       - name: Commit and push translations
         run: |
-          cd content
-          ls
-          cd posts
-          ls
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git checkout -b translation-update
           git add .
-          git commit -m "Translated Markdown files"
-          git push origin translation-update
+          git commit -m "Translated Markdown files" || echo "Nenhuma alteração para commit"
+          git push origin translation-update || echo "Nada para enviar"
