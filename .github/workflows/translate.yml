@@ -51,6 +51,11 @@ jobs:
           new_file="${original%.md}.en.md"
           echo "Salvando tradução em: $new_file"
           echo "${{ steps.deepl.outputs.text }}" > "$new_file"
+          ls
+          cd content
+          ls
+          cd posts
+          ls
 
   commit:
     name: Commit Translated Files
