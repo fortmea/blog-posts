@@ -1,50 +1,75 @@
 name: Translate posts from content folder
-
 on:
-  workflow_dispatch:
-  pull_request:
-    types: [opened, synchronize]
   push:
-    paths:
-      - 'content/*.md'
     branches:
       - main
 
 jobs:
-  deepl:
-    name: DeepL
+  get-files:
+    name: Get Markdown Files to Translate
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.get_files.outputs.files }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List Markdown files (excluindo *.en.md)
+        id: get_files
+        run: |
+          # Lista todos os arquivos .md, exceto os que já possuem .en.md
+          files=$(find content -type f -name "*.md" ! -name "*.en.md" | jq -R -s -c 'split("\n")[:-1]')
+          echo "::set-output name=files::$files"
+
+  translate:
+    name: Translate Each File
+    needs: get-files
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file: ${{ fromJson(needs.get-files.outputs.files) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read file content
+        id: read_file
+        run: |
+          echo "Lendo o conteúdo do arquivo: ${{ matrix.file }}"
+          content=$(cat "${{ matrix.file }}")
+          # Utilizamos o comando set-output para repassar o conteúdo
+          echo "::set-output name=content::$content"
+
+      - name: Translate file content with DeepL
+        id: deepl
+        uses: fabasoad/translation-action@main
+        with:
+          provider: deepl
+          lang: en-uk
+          source: ${{ steps.read_file.outputs.content }}
+          api_key: ${{ secrets.DEEPL_API_KEY }}
+
+      - name: Save translated file
+        run: |
+          # Define o novo nome: substitui a extensão .md por .en.md
+          original="${{ matrix.file }}"
+          new_file="${original%.md}.en.md"
+          echo "Salvando tradução em: $new_file"
+          echo "${{ steps.deepl.outputs.text }}" > "$new_file"
+
+  commit:
+    name: Commit Translated Files
+    needs: translate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Find Markdown files
-        id: find_files
+      - name: Commit and push translations
         run: |
-          files=$(find content -name '*.md' | grep -vE '\.en\.md$' | jq -R . | jq -s -c .)
-          echo "files=$files" >> $GITHUB_ENV
-
-      - name: Translate files and commit changes
-        env:
-          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
-        run: |
-          for file in $(echo ${{ env.files }} | jq -r '.[]'); do
-            basename=$(basename "$file" .md)
-            if [ -f "content/${basename}.en.md" ]; then
-              echo "Skipping $file (manual translation exists)"
-              continue
-            fi
-            translation=$(curl -s -X POST "https://api-free.deepl.com/v2/translate" \
-              -H "Authorization: DeepL-Auth-Key $DEEPL_API_KEY" \
-              -d "text=$(cat "$file")" -d "target_lang=en" | jq -r '.translations[0].text')
-            echo "$translation" > "content/${basename}.en.md"
-            git add "content/${basename}.en.md"
-          done
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git config --global user.name "github-actions"
-            git config --global user.email "github-actions@github.com"
-            git commit -m "Add translated files"
-            git push
-          fi
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git checkout -b translation-update
+          git add .
+          git commit -m "Translated Markdown files"
+          git push origin translation-update
