@@ -25,18 +25,27 @@ jobs:
           echo "files=$files" >> $GITHUB_ENV
 
 
-      - name: Translate files
+      - name: Translate files and commit changes
         env:
-          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+            DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
         run: |
-          for file in $(echo '${{ env.files }}' | jq -r '.[]'); do
-            basename=$(basename "$file" .md)
-            if [ -f "content/${basename}.en.md" ]; then
-              echo "Skipping $file (manual translation exists)"
-              continue
+            for file in $(echo ${{ env.files }} | jq -r '.[]'); do
+              basename=$(basename "$file" .md)
+              if [ -f "content/${basename}.en.md" ]; then
+                echo "Skipping $file (manual translation exists)"
+                continue
+              fi
+              translation=$(curl -s -X POST "https://api-free.deepl.com/v2/translate" \
+                -H "Authorization: DeepL-Auth-Key $DEEPL_API_KEY" \
+                -d "text=$(cat "$file")" -d "target_lang=en" | jq -r '.translations[0].text')
+              echo "$translation" > "content/${basename}.en.md"
+              git add "content/${basename}.en.md"
+            done
+            if git diff --cached --quiet; then
+              echo "No changes to commit."
+            else
+              git config --global user.name "github-actions"
+              git config --global user.email "github-actions@github.com"
+              git commit -m "Add translated files"
+              git push
             fi
-            translation=$(curl -s -X POST "https://api-free.deepl.com/v2/translate" \
-              -H "Authorization: DeepL-Auth-Key $DEEPL_API_KEY" \
-              -d "text=$(cat $file)" -d "target_lang=en" | jq -r '.translations[0].text')
-            echo "$translation" > "content/${basename}.en.md"
-          done
