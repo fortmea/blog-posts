@@ -67,6 +67,10 @@ jobs:
 
       - name: Commit and push translations
         run: |
+          cd content
+          ls
+          cd posts
+          ls
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git checkout -b translation-update
