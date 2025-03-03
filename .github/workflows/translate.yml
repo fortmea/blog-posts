@@ -21,14 +21,15 @@ jobs:
       - name: Find Markdown files
         id: find_files
         run: |
-          files=$(find content -name '*.md' | grep -vE '\.en\.md$')
-          echo "files=$(echo $files | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
+          files=$(find content -name '*.md' | grep -vE '\.en\.md$' | jq -R . | jq -s -c .)
+          echo "files=$files" >> $GITHUB_ENV
+
 
       - name: Translate files
         env:
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
         run: |
-          for file in $(echo ${{ env.files }} | jq -r '.[]'); do
+          for file in $(echo '${{ env.files }}' | jq -r '.[]'); do
             basename=$(basename "$file" .md)
             if [ -f "content/${basename}.en.md" ]; then
               echo "Skipping $file (manual translation exists)"
