@@ -65,10 +65,15 @@ jobs:
           ls
 
       - name: Upload translated file
-        uses: actions/upload-artifact@v4
-        with:
-          name: translated-md
-          path: ${{ matrix.file }}.en.md
+        run: |
+            original="${{ matrix.file }}"
+            new_file="${original%.md}.en.md"
+            artifact_name="translated-md-${original//\//_}"  # Substitui / por _ para evitar problemas no nome do artifact
+        
+            echo "Uploading $new_file as $artifact_name"
+            mv "$new_file" "$artifact_name"  # Renomeia para evitar problemas com caminhos
+            gh run upload-artifact --name "$artifact_name" --path "$artifact_name"
+
 
   commit:
     name: Commit Translated Files
@@ -83,6 +88,13 @@ jobs:
         with:
           name: translated-md
           path: content/
+      - name: Move translated files back to original locations
+        run: |
+            for artifact in translated-md-*; do
+              if [ -d "$artifact" ]; then
+                mv "$artifact"/* content/
+              fi
+            done
 
       - name: Commit and push translations
         run: |
