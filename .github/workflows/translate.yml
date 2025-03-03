@@ -21,8 +21,8 @@ jobs:
       - name: Find Markdown files
         id: find_files
         run: |
-          files=$(find content -name '*.md' | grep -vE '\.en\.md$')
-          echo "files=$(echo $files | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
+          files=$(find content -name '*.md' | grep -vE '\.en\.md$' | jq -R . | jq -s -c .)
+          echo "files=$files" >> $GITHUB_ENV
 
       - name: Translate files and commit changes
         env:
