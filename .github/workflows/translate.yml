@@ -47,8 +47,8 @@ jobs:
         id: deepl
         uses: fabasoad/translation-action@main
         with:
-          provider: mymemory
-          lang: pt|en-us
+          provider: google
+          lang: pt-en
           
           source: ${{ steps.read_file.outputs.content }}
           #api_key: ${{ secrets.DEEPL_API_KEY }}
