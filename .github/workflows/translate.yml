@@ -1,5 +1,6 @@
 name: Translate posts from content folder
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -17,7 +18,6 @@ jobs:
       - name: List Markdown files (excluindo *.en.md)
         id: get_files
         run: |
-          # Lista todos os arquivos .md, exceto os que já possuem .en.md
           files=$(find content -type f -name "*.md" ! -name "*.en.md" | jq -R -s -c 'split("\n")[:-1]')
           echo "::set-output name=files::$files"
 
@@ -35,9 +35,7 @@ jobs:
       - name: Read file content
         id: read_file
         run: |
-          echo "Lendo o conteúdo do arquivo: ${{ matrix.file }}"
           content=$(cat "${{ matrix.file }}")
-          # Utilizamos o comando set-output para repassar o conteúdo
           echo "::set-output name=content::$content"
 
       - name: Translate file content with DeepL
@@ -51,11 +49,11 @@ jobs:
 
       - name: Save translated file
         run: |
-          # Define o novo nome: substitui a extensão .md por .en.md
           original="${{ matrix.file }}"
           new_file="${original%.md}.en.md"
-          echo "Salvando tradução em: $new_file"
+          touch "$new_file" 
           echo "${{ steps.deepl.outputs.text }}" > "$new_file"
+          echo "Arquivo salvo: $new_file"
 
   commit:
     name: Commit Translated Files
@@ -65,11 +63,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Create and switch to new branch
+        run: |
+          git checkout -b translation-update
+
+      - name: Check for changes
+        run: git status
+
       - name: Commit and push translations
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git checkout -b translation-update
           git add .
-          git commit -m "Translated Markdown files"
-          git push origin translation-update
+          git commit -m "Translated Markdown files" || echo "Nada para commitar"
+          git push origin translation-update || echo "Nada para enviar"
