@@ -11,30 +11,29 @@ on:
       - main
 
 jobs:
-  build:
+  deepl:
+    name: DeepL
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Find Markdown files
         id: find_files
         run: |
           files=$(find content -name '*.md')
-          for file in $files; do
-            basename=$(basename "$file" .md)
-            echo "::echo::${basename}=${file}" >> $GITHUB_ENV
-          done
+          echo "files=$(echo $files | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
 
-      - name: DeepL Translate Github Action
+      - name: Translate files
         env:
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
         run: |
-          for file in ${{ env.files }}; do
+          for file in $(echo ${{ env.files }} | jq -r '.[]'); do
             basename=$(basename "$file" .md)
-            gh run --use lyqht/deepl-translate-github-action@v2.0.0 \
-              --with target_languages=en \
-              --with input_file_path="$file" \
-              --with output_file_name_pattern="content/${basename}.{language}.md" \
-              --with deepl_api_key="${{ secrets.DEEPL_API_KEY }}"
+            for lang in en; do
+              translation=$(curl -s -X POST "https://api-free.deepl.com/v2/translate" \
+                -H "Authorization: DeepL-Auth-Key $DEEPL_API_KEY" \
+                -d "text=$(cat $file)" -d "target_lang=$lang" | jq -r '.translations[0].text')
+              echo "$translation" > "content/${basename}.${lang}.md"
+            done
           done
