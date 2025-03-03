@@ -15,10 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List Markdown files (excluindo *.en.md)
+      - name: List Markdown files (excluindo *.en.md e aqueles que já possuem versão .en.md)
         id: get_files
         run: |
-          files=$(find content -type f -name "*.md" ! -name "*.en.md" | jq -R -s -c 'split("\n")[:-1]')
+          files=$(find content -type f -name "*.md" ! -name "*.en.md" | while read file; do
+            if [ ! -f "${file%.md}.en.md" ]; then
+              echo "$file"
+            fi
+          done | jq -R -s -c 'split("\n")[:-1]')
           echo "::set-output name=files::$files"
 
   translate:
@@ -32,33 +36,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Read file content
-        id: read_file
-        run: |
-          content=$(cat "${{ matrix.file }}")
-          echo "::set-output name=content::$content"
-
       - name: Translate file content with DeepL
         id: deepl
         uses: fabasoad/translation-action@main
         with:
           provider: deepl
-          lang: PT-EN
-          source: ${{ steps.read_file.outputs.content }}
+          lang: en-uk
+          source: ${{ matrix.file }}  
           api_key: ${{ secrets.DEEPL_API_KEY }}
 
       - name: Save translated file
         run: |
           original="${{ matrix.file }}"
           new_file="${original%.md}.en.md"
-          touch "$new_file" 
-          echo "${{ steps.deepl.outputs.text }}"
+          echo "Salvando tradução em: $new_file"
           echo "${{ steps.deepl.outputs.text }}" > "$new_file"
-          echo "Arquivo salvo: $new_file"
-          cd content
-          ls
-          cd posts
-          ls
 
   commit:
     name: Commit Translated Files
@@ -68,17 +60,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create and switch to new branch
-        run: |
-          git checkout -b translation-update
-
-      - name: Check for changes
-        run: git status
-
       - name: Commit and push translations
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+          git checkout -b translation-update
           git add .
-          git commit -m "Translated Markdown files" || echo "Nada para commitar"
-          git push origin translation-update || echo "Nada para enviar"
+          git commit -m "Translated Markdown files"
+          git push origin translation-update
