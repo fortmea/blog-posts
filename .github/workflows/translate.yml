@@ -47,10 +47,11 @@ jobs:
         id: deepl
         uses: fabasoad/translation-action@main
         with:
-          provider: deepl
-          lang: en-US
+          provider: mymemory
+          lang: pt|en-us
+          
           source: ${{ steps.read_file.outputs.content }}
-          api_key: ${{ secrets.DEEPL_API_KEY }}
+          #api_key: ${{ secrets.DEEPL_API_KEY }}
 
       - name: Save translated file
         run: |
