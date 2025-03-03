@@ -64,15 +64,21 @@ jobs:
           cd posts
           ls
 
-      - name: Upload translated file
+      - name: Criar string sem extensão
+        id: noext
         run: |
-            original="${{ matrix.file }}"
-            new_file="${original%.md}.en.md"
-            artifact_name="translated-md-${original//\//_}"  # Substitui / por _ para evitar problemas no nome do artifact
-        
-            echo "Uploading $new_file as $artifact_name"
-            mv "$new_file" "$artifact_name"  # Renomeia para evitar problemas com caminhos
-            gh run upload-artifact --name "$artifact_name" --path "$artifact_name"
+          FILE_NO_EXT="${{ matrix.file }}" 
+          FILE_NO_EXT="${FILE_NO_EXT%.md}" # Remove .md da string
+          echo "Path: ${FILE_NO_EXT}.en.md"
+          echo "::set-output name=path::${FILE_NO_EXT}.en.md"
+
+      - name: Upload translated file
+        uses: actions/upload-artifact@v4
+        with:
+              
+              name: translated-md-${{ matrix.file }}
+              path: ${{ steps.noext.outputs.path}}.en.md
+  
 
 
   commit:
