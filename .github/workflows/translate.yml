@@ -70,14 +70,13 @@ jobs:
           FILE_NO_EXT="${{ matrix.file }}" 
           FILE_NO_EXT="${FILE_NO_EXT%.md}" # Remove .md da string
           echo "Path: ${FILE_NO_EXT}.en.md"
-          echo "::set-output name=path::${FILE_NO_EXT}.en.md"
+          echo "::set-output name=path::${FILE_NO_EXT}"
 
       - name: Upload translated file
         uses: actions/upload-artifact@v4
         with:
-              
-              name: translated-md-${{ matrix.file }}
-              path: ${{ steps.noext.outputs.path}}.en.md
+              name: translated-md
+              path: ${{steps.noext.outputs.path}}.en.md
   
 
 
@@ -96,7 +95,7 @@ jobs:
           path: content/
       - name: Move translated files back to original locations
         run: |
-            for artifact in translated-md-*; do
+            for artifact in translated-md; do
               if [ -d "$artifact" ]; then
                 mv "$artifact"/* content/
               fi
