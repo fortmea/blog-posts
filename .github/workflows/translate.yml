@@ -48,14 +48,14 @@ jobs:
         uses: fabasoad/translation-action@main
         with:
           provider: deepl
-          lang: en-uk
+          lang: en
           source: ${{ steps.read_file.outputs.content }}
           api_key: ${{ secrets.DEEPL_API_KEY }}
 
       - name: Save translated file
         run: |
           original="${{ matrix.file }}"
-          new_file="${original.md}.en.md"
+          new_file="${original%.md}.en.md"
           echo "Salvando tradução em: $new_file"
           echo "${{ steps.deepl.outputs.text }}" | jq -r . > "$new_file"
 
