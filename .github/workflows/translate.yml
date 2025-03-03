@@ -1,0 +1,40 @@
+name: Translate posts from content folder
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    paths:
+      - 'content/*.md'
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Find Markdown files
+        id: find_files
+        run: |
+          files=$(find content -name '*.md')
+          for file in $files; do
+            basename=$(basename "$file" .md)
+            echo "::echo::${basename}=${file}" >> $GITHUB_ENV
+          done
+
+      - name: DeepL Translate Github Action
+        env:
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+        run: |
+          for file in ${{ env.files }}; do
+            basename=$(basename "$file" .md)
+            gh run --use lyqht/deepl-translate-github-action@v2.0.0 \
+              --with target_languages=en \
+              --with input_file_path="$file" \
+              --with output_file_name_pattern="content/${basename}.{language}.md" \
+              --with deepl_api_key="${{ secrets.DEEPL_API_KEY }}"
+          done
