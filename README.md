@@ -1,2 +1,6 @@
 # blog-posts
- posts para meu blog
+novo blog
+
+
+### Pra rodar localmente
+hugo serve -b ip --bind ip
