@@ -6,7 +6,7 @@
 <html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
 
 <head>
-    {{ partial "analytics.html" . }}
+  {{ template "_internal/google_analytics.html" . }}
     {{- partial "head.html" . }}
 </head>
 
