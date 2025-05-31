@@ -1,10 +1,17 @@
 baseURL: '/'
 pagination:
   pagerSize: 5
+env: production
 defaultContentLanguage: 'pt'
 theme: "PaperMod"
+enableEmoji: true
 
+services:
+  googleAnalytics:
+    id: 'G-YEJE75S730'
+googleAnalytics: 'G-YEJE75S730'  
 params:
+  googleAnalytics: 'G-YEJE75S730'  
   subtitle: 'minha página pessoal'
   contact:
     email: 'joao.amadeu@unifio.edu.br'
