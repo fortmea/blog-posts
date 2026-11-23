@@ -3,7 +3,9 @@ title: "A viabilidade do uso de protocolos peer-to-peer para hosting de websites
 date: "2022-06-20"
 anterior: "apicomflaskepylocaldatabase"
 proximo: "redditsaver"
-catimage: "https://raw.githubusercontent.com/ipfs-inactive/logo/26a8332e2b1dc7e711561bc03f2e39e0c99e76f6/vector/ipfs-logo-vector-ice-text.svg"
+cover:
+  image: "/posts/images/covers/ipfs.jpg"
+  alt: "Logo do IPFS"
 upd: ""
 tags: ['ipfs', 'decentralized', 'p2p', 'hosting', 'website']
 ---

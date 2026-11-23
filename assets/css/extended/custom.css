@@ -1,0 +1,89 @@
+/* Identidade visual do blog: cor de destaque + fonte de código.
+   PaperMod carrega automaticamente todo CSS em assets/css/extended/. */
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Âmbar: #b45309 tem contraste 5:1 no fundo claro; #f0a63a, 8:1 no escuro. */
+:root {
+    --accent: #b45309;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.dark {
+    --accent: #f0a63a;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--theme);
+}
+
+code,
+pre,
+kbd {
+    font-family: var(--mono);
+}
+
+/* Nome no topo e título da página inicial na mesma fonte da marca (favicon, imagem de compartilhamento). */
+.logo a,
+.profile_inner h1 {
+    font-family: var(--mono);
+    letter-spacing: -0.02em;
+}
+
+.logo a:hover {
+    color: var(--accent);
+}
+
+.profile_inner > span {
+    color: var(--secondary);
+}
+
+.post-content a,
+.toc a:hover {
+    box-shadow: 0 1px 0 var(--accent);
+}
+
+.post-content a:hover,
+.post-tags a:hover,
+.paginav a:hover .title,
+.breadcrumbs a:hover,
+.post-entry:hover .entry-header h2 {
+    color: var(--accent);
+}
+
+.post-tags a:hover {
+    border-color: var(--accent);
+}
+
+.post-entry:hover {
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.buttons .button:hover {
+    color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.social-icons a:hover {
+    color: var(--accent);
+}
+
+.post-content video {
+    width: 100%;
+    border-radius: var(--radius);
+}

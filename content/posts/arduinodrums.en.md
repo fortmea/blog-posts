@@ -2,7 +2,9 @@
 title: "Arduino Drum machine"
 date: "2024-10-31"
 anterior: "searx"
-catimage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/720px-Arduino_Logo.svg.png"
+cover:
+  image: "/posts/images/covers/arduino.jpg"
+  alt: "Arduino logo"
 upd: ""
 tags: ['C', 'arduino', 'sound', 'electronics']
 ---

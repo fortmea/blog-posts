@@ -2,6 +2,9 @@
 title: "New Blog"
 date: "2025-02-23T18:00:00-03:00"
 tags: ['hugo', 'selfhosting', 'web', 'cloudflare']
+cover:
+  image: "/posts/images/covers/hugo-build.jpg"
+  alt: "Terminal showing Hugo building the site in 118 ms"
 summary: "I decided to transfer my personal page to another platform."
 ---
 
@@ -18,7 +21,7 @@ There were several reasons for this, including:
 
 I chose Hugo with the PaperMod theme. Apart from being extremely fast (see image), it's also incredibly easy to configure, reuse, and expand the page using this technology.
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <img src="/posts/images/iamspeed.png" alt="alt">
+    <img src="/posts/images/iamspeed.png" alt="Terminal showing Hugo building the site in 118 ms">
     <p><em>Exactly 118ms to generate the site!</em></p>
 </div>
 

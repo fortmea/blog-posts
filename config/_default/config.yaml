@@ -1,4 +1,4 @@
-baseURL: '/'
+baseURL: 'https://fortmea.tech/'
 pagination:
   pagerSize: 5
 env: production
@@ -31,10 +31,11 @@ params:
   hideSummary: false
   showtoc: true
   tocopen: false
-  defaultTheme: dark 
+  defaultTheme: dark
+  images: ["og-image.jpg"]
   profileMode:
     enabled: true 
-    imageUrl: "posts/images/eu.JPEG"
+    imageUrl: "posts/images/eu.webp"
     imageWidth: 120
     imageHeight: 120
 
@@ -115,10 +116,10 @@ languages:
     title: "joão walter amadeu"
     params:
       subtitle: "Minha página pessoal"
-      copyright: "joão walter amadeu, 2025"
       profileMode:
         title: joão walter amadeu
-        imageTitle: eu
+        subtitle: "Dev mobile. Sistemas embarcados, self-hosting, eletrônica e carros."
+        imageTitle: "João sentado no sofá, comendo um pedaço de bolo de aniversário"
         buttons:
           - name: Postagens
             url: posts
@@ -133,6 +134,9 @@ languages:
         - name: LinkedIn
           title: Meu LinkedIn
           url: "https://www.linkedin.com/in/joao-walter-amadeu/"
+        - name: rss
+          title: RSS
+          url: "/index.xml"
     menu:
       main:
         - identifier: "about"
@@ -143,13 +147,13 @@ languages:
     title: "joão walter amadeu"
     params:
       subtitle: "My personal page"
-      copyright: "joão walter amadeu, 2025"
       menuMore: "Show more"
       readMore: "Read more"
       readOtherPosts: "Other posts"
       profileMode:
         title: joão walter amadeu
-        imageTitle: me
+        subtitle: "Mobile dev. Embedded systems, self-hosting, electronics and cars."
+        imageTitle: "João sitting on a couch, eating a slice of birthday cake"
         buttons:
           - name: Posts
             url: posts
@@ -164,6 +168,9 @@ languages:
         - name: LinkedIn
           title: My linkedin profile
           url: "https://www.linkedin.com/in/joao-walter-amadeu/"
+        - name: rss
+          title: RSS
+          url: "/en/index.xml"
     menu:
       main:
         - identifier: "about"

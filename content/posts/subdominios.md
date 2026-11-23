@@ -2,6 +2,9 @@
 title: "Subdomínios gratuitos!"
 date: "2025-04-09T14:00:00-03:00"
 tags: ['supabase', 'selfhosting', 'web', 'cloudflare', "domínios", "flutter"]
+cover:
+  image: "/posts/images/covers/e-um.jpg"
+  alt: "Página inicial do e-um.dev: Subdomínios grátis para todos"
 summary: "Construi uma plataforma para obter subdomínios gratuitos."
 ---
 
@@ -20,7 +23,8 @@ Por sua vez, as actions gerenciam segredos e chamam os end-points do cloudflare 
 1. Acesse o [website](https://e-um.dev.br/);
 2. Registre-se com o método que preferir (por enquanto apenas GitHub);
 3. Adicione até 5 subdomínios de tipo A ou CNAME, como demonstrado abaixo:
-![GIF](/posts/images/eum.gif)
+<video src="/posts/images/eum.mp4" poster="/posts/images/eum-poster.webp" autoplay loop muted playsinline
+       aria-label="Demonstração: login no e-um.dev, criação de um subdomínio CNAME e sua configuração na Vercel"></video>
 
 
 ### Código

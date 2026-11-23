@@ -5,7 +5,7 @@ author = "Fortmea"
 +++
 
 # Olá, me chamo João!
-|![Eu na foto](/posts/images/eu.JPEG)|
+|![João sentado no sofá, comendo um pedaço de bolo de aniversário](/posts/images/eu.webp)|
 |:--:| 
 |*Eu muito feliz no meu aniversário*|
 ----

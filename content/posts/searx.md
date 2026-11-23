@@ -3,7 +3,9 @@ title: "Configurando seu próprio motor de busca privado com o SearxNG"
 date: "2022-07-17"
 anterior: "redditsaver"
 proximo: ""
-catimage: "https://docs.searxng.org/_static/searxng-wordmark.svg"
+cover:
+  image: "/posts/images/covers/searx.jpg"
+  alt: "Página inicial do SearxNG"
 upd: ""
 tags: ['selfhosting', 'vps', 'searx']
 ---

@@ -5,7 +5,7 @@ author = "Fortmea"
 +++
 
 # Hi, i'm João!
-|![Eu na foto](/posts/images/eu.JPEG)|
+|![João sitting on a couch, eating a slice of birthday cake](/posts/images/eu.webp)|
 |:--:| 
 |*Very happy on my birthday*|
 ----

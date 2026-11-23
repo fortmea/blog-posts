@@ -3,7 +3,9 @@ title: "Biblioteca para banco de dados local em Python"
 date: "2022-06-02"
 anterior: ""
 proximo: "apicomflaskepylocaldatabase"
-catimage: "https://www.python.org/static/community_logos/python-logo-generic.svg"
+cover:
+  image: "/posts/images/covers/python.jpg"
+  alt: "Logo do Python"
 upd: ""
 tags: ['python', 'library', 'pypi']
 ---

@@ -2,6 +2,9 @@
 title: "Novo blog"
 date: "2025-02-23T18:00:00-03:00"
 tags: ['hugo', 'selfhosting', 'web', 'cloudflare']
+cover:
+  image: "/posts/images/covers/hugo-build.jpg"
+  alt: "Terminal mostrando o Hugo gerando o site em 118 ms"
 summary: "Resolvi transferir minha página pessoal para outra plataforma."
 ---
 
@@ -25,7 +28,7 @@ extremamente fácil de configurar, reutilizar, e expandir a página utilizando
 essa tecnologia.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <img src="/posts/images/iamspeed.png" alt="alt">
+    <img src="/posts/images/iamspeed.png" alt="Terminal mostrando o Hugo gerando o site em 118 ms">
     <p><em>Literalmente 118ms para gerar o site!</em></p>
 </div>
 

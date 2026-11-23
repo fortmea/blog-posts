@@ -3,7 +3,9 @@ title: "Api com Flask e a Biblioteca pylocaldatabase para armazenamento de dados
 date: "2022-06-06"
 anterior: "pylocaldatabase"
 proximo: "ipfs"
-catimage: "https://www.python.org/static/community_logos/python-logo-generic.svg"
+cover:
+  image: "/posts/images/covers/python.jpg"
+  alt: "Logo do Python"
 upd: ""
 tags: ['python', 'library', 'api']
 ---
